@@ -32,37 +32,37 @@ bool line(std::string str, char player) {
     int winCount = 0;
     for (int x = 0; x < 3; x++) {
         for (int y = 0; y < 3; y++) {
-            if (x == 0 && y == 0 && current_element(x, y, str) == 'O') {
-                if (current_element(x+1, y, str) == 'O' && current_element(x+2, y, str) == 'O') {
+            if (x == 0 && y == 0 && current_element(x, y, str) == player) {
+                if (current_element(x+1, y, str) == player && current_element(x+2, y, str) == player) {
                     line = true;
                     winCount++;
-                } else if (current_element(x, y+1, str) == 'O' && current_element(x, y+2, str) == 'O') {
+                } else if (current_element(x, y+1, str) == player && current_element(x, y+2, str) == player) {
                     line = true;
                     winCount++;
-                } else if (current_element(x+1, y+1, str) == 'O' && current_element(x+2, y+2, str) == 'O') {
-                    line = true;
-                    winCount++;
-                }
-            } else if (x == 0 && y == 1 && current_element(x, y, str) == 'O') {
-                if (current_element(x+1, y, str) == 'O' && current_element(x+2, y, str) == 'O') {
+                } else if (current_element(x+1, y+1, str) == player && current_element(x+2, y+2, str) == player) {
                     line = true;
                     winCount++;
                 }
-            } else if (x == 0 && y == 2 && current_element(x, y, str) == 'O') {
-                if (current_element(x+1, y, str) == 'O' && current_element(x+2, y, str) == 'O') {
-                    line = true;
-                    winCount++;
-                } else if (current_element(x+1, y-1, str) == 'O' && current_element(x+2, y-2, str) == 'O') {
+            } else if (x == 0 && y == 1 && current_element(x, y, str) == player) {
+                if (current_element(x+1, y, str) == player && current_element(x+2, y, str) == player) {
                     line = true;
                     winCount++;
                 }
-            } else if (x == 1 && y == 0 && current_element(x, y, str) == 'O') {
-                if (current_element(x, y+1, str) == 'O' && current_element(x, y+2, str) == 'O') {
+            } else if (x == 0 && y == 2 && current_element(x, y, str) == player) {
+                if (current_element(x+1, y, str) == player && current_element(x+2, y, str) == player) {
+                    line = true;
+                    winCount++;
+                } else if (current_element(x+1, y-1, str) == player && current_element(x+2, y-2, str) == player) {
                     line = true;
                     winCount++;
                 }
-            } else if (x == 2 && y == 0 && current_element(x, y, str) == 'O') {
-                if (current_element(x, y+1, str) == 'O' && current_element(x, y+2, str) == 'O') {
+            } else if (x == 1 && y == 0 && current_element(x, y, str) == player) {
+                if (current_element(x, y+1, str) == player && current_element(x, y+2, str) == player) {
+                    line = true;
+                    winCount++;
+                }
+            } else if (x == 2 && y == 0 && current_element(x, y, str) == player) {
+                if (current_element(x, y+1, str) == player && current_element(x, y+2, str) == player) {
                     line = true;
                     winCount++;
                 }
