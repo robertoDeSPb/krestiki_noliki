@@ -26,114 +26,67 @@ int count(std::string str, std::string side) {
     }
 }
 
-bool petya(std::string str) {
-    bool krestiki = false;
-    int winCount = 0;
-    for (int x = 0; x < 3; x++) {
-        for (int y = 0; y < 3; y++) {
-            if (x == 0 && y == 0 && current_element(x, y, str) == 'X') {
-                if (current_element(x+1, y, str) == 'X' && current_element(x+2, y, str) == 'X') {
-                    krestiki = true;
-                    winCount++;
-                } else if (current_element(x, y+1, str) == 'X' && current_element(x, y+2, str) == 'X') {
-                    krestiki = true;
-                    winCount++;
-                } else if (current_element(x+1, y+1, str) == 'X' && current_element(x+2, y+2, str) == 'X') {
-                    krestiki = true;
-                    winCount++;
-                }
-            } else if (x == 0 && y == 1 && current_element(x, y, str) == 'X') {
-                if (current_element(x+1, y, str) == 'X' && current_element(x+2, y, str) == 'X') {
-                    krestiki = true;
-                    winCount++;
-                }
-            } else if (x == 0 && y == 2 && current_element(x, y, str) == 'X') {
-                if (current_element(x+1, y, str) == 'X' && current_element(x+2, y, str) == 'X') {
-                    krestiki = true;
-                    winCount++;
-                } else if (current_element(x+1, y-1, str) == 'X' && current_element(x+2, y-2, str) == 'X') {
-                    krestiki = true;
-                    winCount++;
-                }
-            } else if (x == 1 && y == 0 && current_element(x, y, str) == 'X') {
-                if (current_element(x, y+1, str) == 'X' && current_element(x, y+2, str) == 'X') {
-                    krestiki = true;
-                    winCount++;
-                }
-            } else if (x == 2 && y == 0 && current_element(x, y, str) == 'X') {
-                if (current_element(x, y+1, str) == 'X' && current_element(x, y+2, str) == 'X') {
-                    krestiki = true;
-                    winCount++;
-                }
-            }
-        }
-    }
-    if (winCount > 1) {
-        krestiki = false;
-    }
-    return krestiki;
-}
 
-bool vanya(std::string str) {
-    bool noliki = false;
+bool line(std::string str, char player) {
+    bool line = false;
     int winCount = 0;
     for (int x = 0; x < 3; x++) {
         for (int y = 0; y < 3; y++) {
             if (x == 0 && y == 0 && current_element(x, y, str) == 'O') {
                 if (current_element(x+1, y, str) == 'O' && current_element(x+2, y, str) == 'O') {
-                    noliki = true;
+                    line = true;
                     winCount++;
                 } else if (current_element(x, y+1, str) == 'O' && current_element(x, y+2, str) == 'O') {
-                    noliki = true;
+                    line = true;
                     winCount++;
                 } else if (current_element(x+1, y+1, str) == 'O' && current_element(x+2, y+2, str) == 'O') {
-                    noliki = true;
+                    line = true;
                     winCount++;
                 }
             } else if (x == 0 && y == 1 && current_element(x, y, str) == 'O') {
                 if (current_element(x+1, y, str) == 'O' && current_element(x+2, y, str) == 'O') {
-                    noliki = true;
+                    line = true;
                     winCount++;
                 }
             } else if (x == 0 && y == 2 && current_element(x, y, str) == 'O') {
                 if (current_element(x+1, y, str) == 'O' && current_element(x+2, y, str) == 'O') {
-                    noliki = true;
+                    line = true;
                     winCount++;
                 } else if (current_element(x+1, y-1, str) == 'O' && current_element(x+2, y-2, str) == 'O') {
-                    noliki = true;
+                    line = true;
                     winCount++;
                 }
             } else if (x == 1 && y == 0 && current_element(x, y, str) == 'O') {
                 if (current_element(x, y+1, str) == 'O' && current_element(x, y+2, str) == 'O') {
-                    noliki = true;
+                    line = true;
                     winCount++;
                 }
             } else if (x == 2 && y == 0 && current_element(x, y, str) == 'O') {
                 if (current_element(x, y+1, str) == 'O' && current_element(x, y+2, str) == 'O') {
-                    noliki = true;
+                    line = true;
                     winCount++;
                 }
             }
         }
     }
     if (winCount > 1) {
-        noliki = false;
+        line = false;
     }
-    return noliki;
+    return line;
 }
 
 int winner (std::string str) {
-    if (petya(str) == 1) {
-        if (vanya(str) == 0 && count(str, "krestiki") - count(str, "noliki") == 1 &&
+    if (line(str, 'X') == 1) {
+        if (line(str, 'O') == 0 && count(str, "krestiki") - count(str, "noliki") == 1 &&
                 count(str, "invalid") == 0) {
             return 1;
         }else return 0;
-    } else if (vanya(str) == 1) {
-        if (petya(str) == 0 && count(str, "krestiki") - count(str, "noliki") == 0 &&
+    } else if (line(str, 'O') == 1) {
+        if (line(str, 'X') == 0 && count(str, "krestiki") - count(str, "noliki") == 0 &&
             count(str, "invalid") == 0) {
             return 2;
         } else return 0;
-    } else if (petya(str) == 0 && vanya(str) == 0) {
+    } else if (line(str, 'X') == 0 && line(str, 'O') == 0) {
         if (count(str, "krestiki") + count(str, "noliki") + count(str, "point") == 9 &&
                ((count(str, "krestiki") - count(str, "noliki") == 0) ||
                 (count(str, "krestiki") - count(str, "noliki") == 1))) {
